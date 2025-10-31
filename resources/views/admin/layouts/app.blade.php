@@ -10,6 +10,7 @@
     {{-- <link href="./dist/libs/jsvectormap/dist/jsvectormap.css?1750026893" rel="stylesheet" /> --}}
     <!-- END PAGE LEVEL STYLES -->
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link rel="stylesheet" href="{{ asset('assets/global/upload-preview/upload-preview.css') }}">
     <link href="{{ asset('assets/admin/css/tabler.css') }}" rel="stylesheet" />
     <!-- END GLOBAL MANDATORY STYLES -->
 
@@ -18,6 +19,9 @@
         @import url("https://rsms.me/inter/inter.css");
     </style>
     <!-- END CUSTOM FONT -->
+    <!-- Template CSS -->
+    {{-- <link rel="stylesheet" href="{{ asset('assets/frontend/dist/css/main.css') }}" /> --}}
+    @stack('styles')
 </head>
 
 <body>
@@ -62,8 +66,11 @@
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="{{ asset('assets/global/upload-preview/upload-preview.min.js') }}"></script>
     <script src="{{ asset('assets/admin/js/tabler.min.js') }}" defer></script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
+
+    @stack('scripts')
 </body>
 
 </html>

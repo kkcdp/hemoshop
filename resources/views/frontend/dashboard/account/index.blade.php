@@ -12,11 +12,9 @@
                     @csrf
                     @method('PUT')
                     <div class="row mt-30">
+                        {{-- default fallback ir norādīts DB, user tabulā, pie avatar lauka --}}
+                        <x-input-image id="image-preview" name="avatar" :image="auth('web')->user()->avatar ?? asset('/defaults/avatar.jpg')" />
 
-                        {{-- uztaisīt fallback uz default avataru ja nav ielādēts usera avatar --}}
-                        <x-input-image id="image-preview" name="avatar" :image="auth('web')->user()->avatar ?? asset('defaults/avatar.jpg')" />
-
-                        <x-input-error :messages="$errors->get('avatar')" class="mt-2" />
                         <div class="form-group col-md-12">
                             <label>Name<span class="required">*</span></label>
                             <input required="" class="form-control" name="name" type="text"
