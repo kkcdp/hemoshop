@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:admin')
@@ -63,4 +64,9 @@ Route::middleware('auth:admin')
         Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
         Route::put('profile', [ProfileController::class, 'profileUpdate'])->name('profile.update');
         Route::put('profile/password', [ProfileController::class, 'passwordUpdate'])->name('profile.password.update');
+
+        /**  Settings Routes   */
+        Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
+        Route::put('settings/general-settings', [SettingController::class, 'generalSettings'])->name('settings.general');
+
     });
