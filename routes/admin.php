@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Admin\Auth\ConfirmablePasswordController;
-use App\Http\Controllers\Admin\Auth\EmailVerificationNotificationController;
-use App\Http\Controllers\Admin\Auth\EmailVerificationPromptController;
-use App\Http\Controllers\Admin\Auth\NewPasswordController;
-use App\Http\Controllers\Admin\Auth\PasswordController;
-use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
-use App\Http\Controllers\Admin\Auth\RegisteredUserController;
-use App\Http\Controllers\Admin\Auth\VerifyEmailController;
-use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\Auth\PasswordController;
+use App\Http\Controllers\Admin\Auth\NewPasswordController;
+use App\Http\Controllers\Admin\Auth\VerifyEmailController;
+use App\Http\Controllers\Admin\Auth\RegisteredUserController;
+use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Admin\Auth\ConfirmablePasswordController;
+use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\Auth\EmailVerificationPromptController;
+use App\Http\Controllers\Admin\Auth\EmailVerificationNotificationController;
 
 Route::middleware('guest:admin')
     ->prefix('admin')
@@ -65,8 +66,14 @@ Route::middleware('auth:admin')
         Route::put('profile', [ProfileController::class, 'profileUpdate'])->name('profile.update');
         Route::put('profile/password', [ProfileController::class, 'passwordUpdate'])->name('profile.password.update');
 
+        /**  Category Routes   */
+        Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
+        Route::post('categories', [CategoryController::class, 'store'])->name('categories.store');
+        Route::get('categories/nested', [CategoryController::class, 'getNestedCategories'])->name('categories.nested');
+
+
+
         /**  Settings Routes   */
         Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
         Route::put('settings/general-settings', [SettingController::class, 'generalSettings'])->name('settings.general');
-
     });
