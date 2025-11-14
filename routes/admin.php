@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Auth\NewPasswordController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
@@ -76,4 +77,7 @@ Route::middleware('auth:admin')
         /**  Settings Routes   */
         Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
         Route::put('settings/general-settings', [SettingController::class, 'generalSettings'])->name('settings.general');
+
+        /**  Language Routes   */
+        Route::resource('language', LanguageController::class);
     });
