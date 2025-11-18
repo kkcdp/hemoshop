@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Language;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -24,5 +25,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(AdminSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(LanguageSeeder::class);
     }
 }

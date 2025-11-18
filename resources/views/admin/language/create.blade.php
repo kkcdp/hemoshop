@@ -12,35 +12,70 @@
             </div>
 
             <div class="card-body">
-                <form action="">
+                <form action="{{ route('admin.language.store') }}" method="POST">
+                    @csrf
                     <div class="form-group">
                         <label for="">Language</label>
-                        <select name="" id="" class="form-control my-2">
+                        <select name="lang" id="language-select" class="form-control my-2">
                             <option value="">---Select---</option>
-                            <option value=""></option>
+                            @foreach (config('language') as $key => $lang)
+                                <option value="{{ $key }}">{{ $lang['name'] }}</option>
+                            @endforeach
                         </select>
+                        @error('lang')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="">Name</label>
+                        <input readonly name="name" type="text" class="form-control my-2" id="name">
+                        @error('name')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="">Slug</label>
-                        <input readonly type="text" class="form-control mt-2">
+                        <input readonly name="slug" type="text" class="form-control my-2" id="slug">
+                        @error('slug')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="form-group">
-                        <label for="Is it default?"></label>
-                        <select name="" id="" class="form-control">
+                        <label for="">Is it default?</label>
+                        <select name="default" id="" class="form-control my-2">
                             <option value="0">No</option>
                             <option value="1">Yes</option>
                         </select>
+                        @error('default')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="form-group">
-                        <label for="Status"></label>
-                        <select name="" id="" class="form-control">
+                        <label for="">Status</label>
+                        <select name="status" id="" class="form-control my-2">
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
                         </select>
+                        @error('status')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
-                    <button type="submit" class="btn btn-md btn-primary mt-4">Create</button>
+                    <button type="submit" class="btn btn-md btn-primary mt-3">Create</button>
                 </form>
             </div>
-            < </div>
+        </div>
     </section>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#language-select').on('change', function() {
+                let value = $(this).val();
+                let name = $(this).children(':selected').text();
+                $('#slug').val(value);
+                $('#name').val(name);
+            })
+        })
+    </script>
+@endpush

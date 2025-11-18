@@ -124,6 +124,7 @@
                                         <div class="font-weight-medium">132 Likes</div>
                                         <div class="text-secondary">21 today</div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
