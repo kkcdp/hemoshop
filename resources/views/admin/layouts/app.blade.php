@@ -90,64 +90,9 @@
     <script src="{{ asset('assets/admin/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/admin/js/custom.js') }}"></script>
 
+    {{-- @include('sweetalert2::index') --}}
+
     <!-- END GLOBAL MANDATORY SCRIPTS -->
-
-    <script>
-        // Add csrf token in ajax request
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        /** Handle Dynamic delete **/
-        $(document).ready(function() {
-
-            $('.delete-item').on('click', function(e) {
-                e.preventDefault();
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        let url = $(this).attr('href');
-                        console.log(url);
-                        $.ajax({
-                            method: 'DELETE',
-                            url: url,
-                            success: function(data) {
-                                if (data.message === 'success') {
-                                    // console.log("Preparing to show success:", data
-                                    //     .message);
-                                    Swal.fire(
-                                        'Deleted!',
-                                        data.message,
-                                        'success'
-                                    )
-                                    window.location.reload();
-                                } else if (data.status === 'error') {
-
-                                    Swal.fire({
-                                        title: 'Error!',
-                                        text: data.message,
-                                        icon: 'error',
-                                    });
-                                }
-                            },
-                            error: function(xhr, status, error) {
-                                console.error(error);
-                            }
-                        });
-                    }
-                })
-            })
-        })
-    </script>
-
 
     @include('admin.layouts.scripts')
     @stack('scripts')
